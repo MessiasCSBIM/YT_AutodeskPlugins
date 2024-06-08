@@ -14,6 +14,7 @@ namespace Treinamento
 {
     public class Main
     {
+
         [CommandMethod("PEGAPONTO")]
         public void PEGAPONTO()
         {
@@ -21,8 +22,10 @@ namespace Treinamento
             Document DocCAD = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
+            // CONFIGURA A SELEÇÃO
+            PromptPointOptions Opts = new PromptPointOptions("\nEspecifique o ponto no desenho");
             // SOLICITA A SELEÇÃO DE UM PONTO NO DESENHO
-            PromptPointResult PontoClicado = DocEditor.GetPoint("Especifique o ponto no desenho");
+            PromptPointResult PontoClicado = DocEditor.GetPoint(Opts);
             // VERIFICA SE O USUÁRIO ESPECIFICOU UM PONTO NA TELA
             if (PontoClicado.Status == PromptStatus.OK)
             {
@@ -38,7 +41,9 @@ namespace Treinamento
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
 
-            PromptDoubleResult NumeroDigitado = DocEditor.GetDouble("Especifique o comprimento");
+            PromptDoubleOptions Opts = new PromptDoubleOptions("\nEspecifique o comprimento");
+            Opts.DefaultValue = 10;
+            PromptDoubleResult NumeroDigitado = DocEditor.GetDouble(Opts);
             if (NumeroDigitado.Status == PromptStatus.OK)
             {
                 MessageBox.Show("O valor digitado é : " + NumeroDigitado.Value.ToString());
@@ -54,7 +59,9 @@ namespace Treinamento
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
 
-            PromptResult TextoDigitado = DocEditor.GetString("Especifique o texto");
+            PromptStringOptions Opts = new PromptStringOptions("\nEspecifique o texto");
+            Opts.AllowSpaces = true;
+            PromptResult TextoDigitado = DocEditor.GetString(Opts);
             if (TextoDigitado.Status == PromptStatus.OK)
             {
                 MessageBox.Show("O texto digitado foi: " + TextoDigitado.StringResult);
@@ -68,7 +75,11 @@ namespace Treinamento
             Document DocCAD = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
-            PromptIntegerResult NumeroDigitado = DocEditor.GetInteger("Especifique o número inteiro");
+
+            PromptIntegerOptions Opts = new PromptIntegerOptions("\nEspecifique o número inteiro");
+            Opts.DefaultValue = 2;
+         
+            PromptIntegerResult NumeroDigitado = DocEditor.GetInteger(Opts);
             if (NumeroDigitado.Status == PromptStatus.OK)
             {
                 MessageBox.Show("O número digitado foi: " + NumeroDigitado.Value.ToString());
@@ -83,7 +94,10 @@ namespace Treinamento
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
 
-            PromptEntityResult ResultadoSel = DocEditor.GetEntity("Selecione o objeto");
+            PromptEntityOptions Opts = new PromptEntityOptions("\nSelecione a polyline");
+            Opts.SetRejectMessage("\nSelecione apenas polylines");
+            Opts.AddAllowedClass(typeof(Polyline), true);
+            PromptEntityResult ResultadoSel = DocEditor.GetEntity(Opts);
             if (ResultadoSel.Status == PromptStatus.OK)
             {
                 MessageBox.Show("O objeto foi selecionado");
@@ -101,10 +115,12 @@ namespace Treinamento
             Database DocData = DocCAD.Database;
             Editor DocEditor = DocCAD.Editor;
 
-            PromptPointResult PontoClicado = DocEditor.GetPoint("Especifique o ponto inicial");
+            PromptPointResult PontoClicado = DocEditor.GetPoint("\nEspecifique o ponto inicial");
             if (PontoClicado.Status == PromptStatus.OK)
             {
-                PromptPointResult PontoCorner = DocEditor.GetCorner("Especifique o segundo ponto", PontoClicado.Value);
+                PromptCornerOptions Opts = new PromptCornerOptions("\nEspecifique o segundo ponto", PontoClicado.Value);
+                Opts.UseDashedLine = true;
+                PromptPointResult PontoCorner = DocEditor.GetCorner(Opts);
                 if (PontoCorner.Status == PromptStatus.OK)
                 {
                     Point3d Ponto1 = PontoClicado.Value;
@@ -113,6 +129,24 @@ namespace Treinamento
                     MessageBox.Show("Segunda Coordenada: " + Ponto2.X.ToString() + ", " + Ponto2.Y.ToString());
                 }
             }
+        }
+        [CommandMethod("SELECIONACIRCULOS")]
+        public void SELECIONACIRCULOS()
+        {
+            // RECEBE AS PRINCIPAIS VARIÁVEIS DA AUTODESK
+            Document DocCAD = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            Database DocData = DocCAD.Database;
+            Editor DocEditor = DocCAD.Editor;
+            TypedValue TipoCirculo = new TypedValue(0, "CIRCLE");
+            SelectionFilter SelFiltro = new SelectionFilter(new TypedValue[] { TipoCirculo });
+            PromptSelectionOptions Opts = new PromptSelectionOptions();
+            Opts.MessageForAdding = "\nSelecione os círculos";
+            Opts.MessageForRemoval = "\nApenas círculos";
+            PromptSelectionResult SelObjetos = DocEditor.GetSelection(Opts, SelFiltro);
+            if (SelObjetos.Status == PromptStatus.OK)
+            {
+                MessageBox.Show("A quantidade de objetos selecionados foi: " + SelObjetos.Value.Count.ToString());
+            }   
         }
 
     }

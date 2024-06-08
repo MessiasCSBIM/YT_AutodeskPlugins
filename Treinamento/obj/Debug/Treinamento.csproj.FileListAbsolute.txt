@@ -43,6 +43,10 @@ C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treina
 C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_04.dll
 C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_05.dll
 C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_06.dll
-C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_06.pdb
-C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\obj\Debug\Treinamento_06.dll
-C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\obj\Debug\Treinamento_06.pdb
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_07.dll
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_08.dll
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_09.dll
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_10.dll
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\bin\Debug\Treinamento_10.pdb
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\obj\Debug\Treinamento_10.dll
+C:\Users\messi\OneDrive\Área de Trabalho\Curso\GIT\Treinamento\obj\Debug\Treinamento_10.pdb
